@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body style="background-color:#ADD8E6;">
+    <div class="container">
+        <div class="user-selection">
+            <label for="user-type">Select site:</label>
+            <select id="user-type" onchange="filterSites()">
+                <option value="">Select</option>
+                <option value=".In">.In</option>
+                <option value=".Gov.in">.Gov.in</option>
+                <option value=".Org.in">.Org.in</option>
+                <option value="others">others</option>
+            </select>
+            <div class="search-container">
+                <label for="siteSearch">Search Site:</label>
+                <input type="text" id="siteSearch" name="siteSearch" oninput="searchSites()" placeholder="Enter required site">
+            </div>
+        </div>
+    </div>
+    
+    <div id="links">
+        <h1 class="in">.In Sites</h1>    
+        <a class="in" href="http://www.bsa.in">http://www.bsa.in</a><br>
+        <a class="in" href="http://www.bsaladybird.in">http://www.bsaladybird.in</a><br>
+        <a class="in" href="http://www.bundook.in">http://www.bundook.in</a><br>
+        <a class="in" href="http://www.cacl.in">http://www.cacl.in</a><br>
+        <a class="in" href="http://www.camshot.in">http://www.camshot.in</a><br>
+        <a class="in" href="http://www.ceramix.in">http://www.ceramix.in</a><br>
+        <a class="in" href="http://www.designdimensions.in">http://www.designdimensions.in</a><br>
+        <a class="in" href="http://www.developed.in">http://www.developed.in</a><br>
+        <a class="in" href="http://www.easymovies.in">http://www.easymovies.in</a><br>
+        <a class="in" href="http://www.edu.in">http://www.edu.in</a><br>
+        <a class="in" href="http://www.hellohealyh.in">http://www.hellohealth.in</a><br>
+        <a class="in" href="http://www.airindia.in">http://www.airindia.in</a><br>
+        
+        <h1 class="orgin">.Org.in Sites</h1>
+        <a class="orgin" href="http://www.polycab.org.in">http://www.polycab.org.in</a><br>
+        <a class="orgin" href="http://www.fip.org.in">http://www.fip.org.in</a><br>
+        <a class="orgin" href="http://www.rbi.org.in">http://www.rbi.org.in</a><br>
+        <a class="orgin" href="http://www.find.org.in">http://www.find.org.in</a><br>
+        <a class="orgin" href="http://www.industree.org.in">http://www.industree.org.in</a><br>
+        
+        <h1 class="govin">.Gov.in Sites</h1>
+        <a class="govin" href="http://tajmahal.gov.in">http://tajmahal.gov.in</a><br>
+        <a class="govin" href="http://uidai.gov.in">http://uidai.gov.in</a><br>
+        <a class="govin" href="http://diu.gov.in">http://diu.gov.in</a><br>
+        <a class="govin" href="http://pmrnf.gov.in">http://pmrnf.gov.in</a><br>
+        <a class="govin" href="http://indianvisaonline.gov.in">http://indianvisaonline.gov.in</a><br>
+    </div>
+
+    <script>
+        function filterSites() {
+            const userType = document.getElementById('user-type').value;
+            const inSites = document.querySelectorAll('.in');
+            const orgInSites = document.querySelectorAll('.orgin');
+            const govInSites = document.querySelectorAll('.govin');
+            
+            inSites.forEach(site => site.classList.add('hidden'));
+            orgInSites.forEach(site => site.classList.add('hidden'));
+            govInSites.forEach(site => site.classList.add('hidden'));
+            
+            if (userType === '.In') {
+                inSites.forEach(site => site.classList.remove('hidden'));
+            } else if (userType === '.Org.in') {
+                orgInSites.forEach(site => site.classList.remove('hidden'));
+            } else if (userType === '.Gov.in') {
+                govInSites.forEach(site => site.classList.remove('hidden'));
+            } else if (userType === 'others') {
+                inSites.forEach(site => site.classList.add('hidden'));
+                orgInSites.forEach(site => site.classList.add('hidden'));
+                govInSites.forEach(site => site.classList.add('hidden'));
+            }
+        }
+
+        function searchSites() {
+            const query = document.getElementById('siteSearch').value.toLowerCase();
+            const links = document.querySelectorAll('#links a');
+            
+            links.forEach(link => {
+                if (link.href.toLowerCase().includes(query)) {
+                    link.classList.remove('hidden');
+                } else {
+                    link.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
